@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Gestión de Empleados</h1>
+
+    <ul>
+        {% for person in persons %}
+            <li>{{ person.firstname }} | {{ person.is_active }} | {{ person.birth }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
