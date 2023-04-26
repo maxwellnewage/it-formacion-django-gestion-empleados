@@ -27,7 +27,9 @@ def create_person(request):
     if request.method == "POST":
         form = PersonForm(request.POST)
         if form.is_valid():
-            form.save()
+            person = form.save(commit=False)
+            person.is_active = False
+            person.save()
             return redirect('home')
 
     return render(request, 'form.html', {
@@ -35,4 +37,22 @@ def create_person(request):
         'submit': 'Crear',
         'title': 'Crear Persona',
         'action': 'btn-primary'
+    })
+
+
+def update_person(request, person_id):
+    person = Person.objects.get(id=person_id)
+    form = PersonForm(instance=person)
+
+    if request.method == "POST":
+        form = PersonForm(request.POST, instance=person)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    return render(request, 'form.html', {
+        'form': form,
+        'submit': 'Modificar',
+        'title': 'Modificar Persona',
+        'action': 'btn-warning'
     })
