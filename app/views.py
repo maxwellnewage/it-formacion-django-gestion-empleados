@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
-from .models import Person
+from .models import Person, Employee
 from .forms import PersonForm
 
 
 def home(request):
     persons = Person.objects.all()
+    employees = Employee.objects.all()
 
     return render(request, 'home.html', {
-        'persons': persons
+        'persons': persons,
+        'employees': employees
     })
 
 

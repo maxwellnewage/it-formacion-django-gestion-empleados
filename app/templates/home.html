@@ -44,6 +44,17 @@
 </table>
 </div>
 
+<div class="row">
+    <ul>
+        {% for e in employees %}
+            <li>Salario: {{ e.salary }}</li>
+            <li>Persona: {{ e.person.firstname }}</li>
+            <li>Seniority: {{ e.get_seniority_display }}</li>
+            <hr/>
+        {% endfor %}
+    </ul>
+</div>
+
 
 
 {% endblock %}
