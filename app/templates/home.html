@@ -1,12 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Gestión de Empleados</h1>
+<h1>Gestión de Personas</h1>
 
-    <ul>
-        {% for person in persons %}
-            <li>{{ person.firstname }} | {{ person.is_active }} | {{ person.birth }}</li>
-        {% endfor %}
-    </ul>
+<div class="row text-center">
+    <div class="col">
+        <a class="btn btn-primary" href="{% url 'person-create' %}">Crear Persona</a>
+    </div>
+</div>
+
+<div class="row">
+    <table class="table text-center">
+    <thead>
+    <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Cumple</th>
+        <th scope="col">Esta Activo?</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for person in persons %}
+    <tr>
+        <td>{{ person.firstname }}</td>
+        <td>{{ person.lastname }}</td>
+        <td>{{ person.birth }}</td>
+
+        {% if person.is_active %}
+          <td class="text-success">SI</td>
+        {% else %}
+          <td class="text-danger">NO</td>
+        {% endif %}
+
+        <td>
+          <a href="#" class="btn btn-warning">Modificar</a>
+          <a href="{% url 'person-delete' person.id %}" class="btn btn-danger">Eliminar</a>
+        </td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
 
 {% endblock %}
