@@ -11,3 +11,19 @@ class Person(models.Model):
     def __str__(self):
         return f'{self.firstname} {self.lastname}'
 
+
+class Employee(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    salary = models.IntegerField()
+    seniority = models.CharField(
+        max_length=3,
+        choices=[
+            ('JR', 'Junior'),
+            ('SSR', 'Semi-senior'),
+            ('SR', 'Senior')
+        ],
+        default=None
+    )
+
+    def __str__(self):
+        return f'{self.person} (${self.salary})'
