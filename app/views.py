@@ -1,7 +1,9 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Person, Employee
 from .forms import PersonForm, EmployeeForm
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 def home(request):
@@ -87,4 +89,3 @@ def delete_employee(request, employee_id):
     employee.delete()
 
     return redirect('home')
-
